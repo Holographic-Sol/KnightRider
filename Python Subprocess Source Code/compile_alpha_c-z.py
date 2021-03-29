@@ -43,25 +43,25 @@ led_alpha_file = 'kb_alpha.pyw'
 if os.path.exists(led_alpha_file):
     print('-- found:', led_alpha_file)
 
-i = 0
-for _ in alpha_str:
-    new_name = os.path.join(os.getcwd() + '\\kb_alpha_' + alpha_str[i] + '.pyw')
-    print('-- creating:', new_name)
-    shutil.copy(led_alpha_file, new_name)
+    i = 0
+    for _ in alpha_str:
+        new_name = os.path.join(os.getcwd() + '\\kb_alpha_' + alpha_str[i] + '.pyw')
+        print('-- creating:', new_name)
+        shutil.copy(led_alpha_file, new_name)
 
-    for line in fileinput.input(new_name, inplace=True):
-        print(line.rstrip().replace(target_str[0], str(target_str[0] + alpha_str[i]))),
+        for line in fileinput.input(new_name, inplace=True):
+            print(line.rstrip().replace(target_str[0], str(target_str[0] + alpha_str[i]))),
 
-    for line in fileinput.input(new_name, inplace=True):
-        print(line.rstrip().replace(target_str[1], str('{' + str(alpha_led[i]) + ':'))),
+        for line in fileinput.input(new_name, inplace=True):
+            print(line.rstrip().replace(target_str[1], str('{' + str(alpha_led[i]) + ':'))),
 
-    time.sleep(0.5)
+        time.sleep(0.5)
 
-    cmd = ('pyinstaller -F ' + '.\\kb_alpha_' + alpha_str[i] + '.pyw')
-    xcmd = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        cmd = ('pyinstaller -F ' + '.\\kb_alpha_' + alpha_str[i] + '.pyw')
+        xcmd = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-    i += 1
+        i += 1
 
-print('-- complete. any subprocesses if any will take a moment to complete.')
-input('\nPress any key to quit.')
+    print('-- complete. any subprocesses if any will take a moment to complete.')
+    input('\nPress any key to quit.')
 
